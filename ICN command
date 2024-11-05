@@ -1,0 +1,9 @@
+PowerShell -ExecutionPolicy Bypass -Command "
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
+    try {
+        Invoke-WebRequest -Uri 'https://console.icn.global/downloads/install/start.ps1' -OutFile '.\start.ps1' -UseBasicParsing;
+        & '.\start.ps1' -PrivateKey '<private_key>';
+    } finally {
+        Remove-Item .\start.ps1 -ErrorAction SilentlyContinue;
+    }
+"
